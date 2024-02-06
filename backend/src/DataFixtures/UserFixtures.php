@@ -34,9 +34,18 @@ class UserFixtures extends Fixture
         {
             if($i === 19) {
                 $user = new User();
-                $hashPassword = $this->passwordHasher->hashPassword($user, 'test1234');
+                $hashPassword = $this->passwordHasher->hashPassword($user, 'user');
     
-                $user->setEmail('abdessamad.bannouf@laposte.net')
+                $user->setEmail('user@test.com')
+                    ->setRoles($roles[0])
+                    ->setPassword($hashPassword);
+    
+                $manager->persist($user);
+
+                $user = new User();
+                $hashPassword = $this->passwordHasher->hashPassword($user, 'admin');
+
+                $user->setEmail('admin@test.com')
                     ->setRoles($roles[1])
                     ->setPassword($hashPassword);
     
